@@ -243,6 +243,8 @@ const css = `
   display: flex; flex-wrap: wrap; gap: 1.1rem;
   animation: heroFadeUp 0.8s 0.5s ease both;
   padding-top: 0.4rem;
+  position: relative;
+  z-index: 5;
 }
 @media(max-width:768px){
   .hero-ctas{
@@ -252,16 +254,26 @@ const css = `
 @media(max-width:640px){
   .hero-ctas{
     gap: 0.75rem;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
   .hero-ctas > * {
-    width: 100%;
+    flex: 1;
+    min-width: 140px;
     justify-content: center;
+    pointer-events: auto;
   }
 }
 @media(max-width:480px){
   .hero-ctas{
     gap: 0.6rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .hero-ctas > * {
+    flex: 1;
+    min-width: 120px;
+    pointer-events: auto;
   }
 }
 
@@ -352,6 +364,7 @@ const css = `
   background-clip: padding-box;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12), 0 4px 16px rgba(0,0,0,0.3);
   white-space: nowrap;
+  pointer-events: auto;
 }
 @media(max-width:768px){
   .cta-secondary{
@@ -364,12 +377,14 @@ const css = `
     padding: 0.85rem 1.5rem;
     font-size: 0.9rem;
     gap: 0.5rem;
+    pointer-events: auto;
   }
 }
 @media(max-width:480px){
   .cta-secondary{
     padding: 0.8rem 1.2rem;
     font-size: 0.85rem;
+    pointer-events: auto;
   }
 }
 /* animated border ring */

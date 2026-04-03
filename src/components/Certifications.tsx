@@ -159,7 +159,8 @@ function CertCard({ c }: { c: typeof certs[0] }) {
             pointerEvents: 'none',
           }} />
 
-          <div>
+          {/* Inner wrapper with scaleX(-1) to counter the parent rotateY(180deg) */}
+          <div style={{ transform: 'scaleX(-1)' }}>
             <div style={{
               fontSize: 8, letterSpacing: 3.5, color: `${c.accent}66`,
               textTransform: 'uppercase', marginBottom: 6,
@@ -172,7 +173,7 @@ function CertCard({ c }: { c: typeof certs[0] }) {
             <div style={{ fontSize: 10, color: 'rgba(255,255,255,.28)' }}>Credential verified ✓</div>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, transform: 'scaleX(-1)' }}>
             <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,.38)', lineHeight: 1.55 }}>{c.name}</div>
             <a
               href={c.link}
