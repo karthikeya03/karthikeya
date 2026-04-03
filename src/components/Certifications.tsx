@@ -83,7 +83,7 @@ function CertCard({ c }: { c: typeof certs[0] }) {
       >
         {/* ── FRONT ── */}
         <div style={{
-          position: 'absolute', inset: 0, borderRadius: 16, padding: '22px 20px',
+          position: 'absolute', inset: 0, borderRadius: 16, padding: 'clamp(16px, 4vw, 22px) clamp(14px, 3vw, 20px)',
           background: 'rgba(255,255,255,.025)',
           border: `1px solid ${hov ? c.accent + '33' : 'rgba(255,255,255,.07)'}`,
           backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden',
@@ -244,6 +244,71 @@ export default function Certifications() {
     s.textContent = `
       @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
       @keyframes certBgFloat { 0%,100%{transform:translate(0,0)} 50%{transform:translate(18px,-22px)} }
+      
+      .cert-section {
+        padding: 90px 40px !important;
+      }
+      
+      .cert-grid {
+        gap: 18px !important;
+      }
+      
+      @media(max-width:1024px) {
+        .cert-section {
+          padding: 80px 30px !important;
+        }
+        .cert-grid {
+          grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
+          gap: 14px !important;
+        }
+      }
+      
+      @media(max-width:768px) {
+        .cert-section {
+          padding: 60px 20px !important;
+        }
+        .cert-grid {
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+          gap: 12px !important;
+        }
+      }
+      
+      @media(max-width:640px) {
+        .cert-section {
+          padding: 40px 15px !important;
+        }
+        .cert-grid {
+          grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)) !important;
+          gap: 10px !important;
+        }
+      }
+      
+      @media(max-width:480px) {
+        .cert-section {
+          padding: 30px 10px !important;
+        }
+        .cert-grid {
+          grid-template-columns: 1fr !important;
+          gap: 10px !important;
+        }
+      }
+      
+      .cert-header-h2 {
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+        width: 100% !important;
+      }
+      @media(max-width:640px) {
+        .cert-header-h2 {
+          font-size: clamp(1.8rem, 4vw, 3.5rem) !important;
+        }
+      }
+      @media(max-width:480px) {
+        .cert-header-h2 {
+          font-size: clamp(1.4rem, 3vw, 2.5rem) !important;
+        }
+      }
     `;
     document.head.appendChild(s);
     return () => { document.getElementById('cert-styles')?.remove(); };
@@ -251,7 +316,15 @@ export default function Certifications() {
 
   return (
     <section id="certifications" ref={sectionRef}
-      style={{ position: 'relative', padding: '90px 40px', maxWidth: 1400, margin: '0 auto' }}>
+      className="cert-section"
+      style={{ 
+        position: 'relative', 
+        padding: '90px 40px', 
+        width: '100%',
+        maxWidth: 1400, 
+        margin: '0 auto',
+        boxSizing: 'border-box'
+      }}>
 
       {/* Background orbs — very subtle */}
       <div style={{ position: 'absolute', top: -60, right: '12%', width: 320, height: 320, borderRadius: '50%', background: 'radial-gradient(circle,rgba(0,255,229,.03) 0%,transparent 70%)', filter: 'blur(70px)', pointerEvents: 'none', animation: 'certBgFloat 14s ease-in-out infinite' }} />
@@ -271,7 +344,7 @@ export default function Certifications() {
           <div style={{ width: 28, height: 1, background: '#00ffe5', boxShadow: '0 0 6px #00ffe5' }} />
           <span style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#00ffe5', opacity: .6, fontWeight: 500, fontFamily: 'ui-monospace,monospace' }}>Credentials</span>
         </div>
-        <h2 style={{
+        <h2 className="cert-header-h2" style={{
           fontFamily: 'Syne, sans-serif', fontWeight: 800, lineHeight: 1, margin: 0, padding: 0,
           fontSize: 'clamp(2.2rem, 5vw, 4.8rem)',
           background: 'linear-gradient(100deg,#00ffe5 0%,#fffbe6 45%,#ff9900 100%)',
@@ -279,6 +352,9 @@ export default function Certifications() {
           opacity: headerVis ? 1 : 0,
           transform: headerVis ? 'none' : 'translateY(28px)',
           transition: 'all .9s cubic-bezier(.16,1,.3,1) .1s',
+          overflowWrap: 'break-word',
+          wordBreak: 'break-word',
+          width: '100%',
         }}>CERTIFICATIONS.</h2>
         <p style={{
           marginTop: 14, fontSize: 13, color: 'rgba(255,255,255,.28)',
@@ -291,7 +367,7 @@ export default function Certifications() {
       </div>
 
       {/* Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 18, position: 'relative', zIndex: 1 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 18, position: 'relative', zIndex: 1 }} className="cert-grid">
         {certs.map((c, i) => (
           <div key={c.name} className="cert-obs" data-idx={i} style={{
             opacity: cardVis[i] ? 1 : 0,

@@ -16,11 +16,13 @@ const css = `
   #contact-section {
     position: relative;
     min-height: 100vh;
-    padding: 6rem 1.5rem 4rem;
+    padding: 6rem 2rem 4rem;
     overflow: hidden;
     font-family: 'Syne', sans-serif;
     background: transparent;
   }
+  @media(max-width:1024px){
+    #contact-section{\n      padding: 5rem 1.5rem 3rem;\n    }\n  }\n  @media(max-width:768px){\n    #contact-section{\n      padding: 4rem 1.25rem 2.5rem;\n    }\n  }\n  @media(max-width:640px){\n    #contact-section{\n      padding: 3rem 1rem 2rem;\n    }\n  }\n  @media(max-width:480px){\n    #contact-section{\n      padding: 2rem 0.75rem 1.5rem;\n      min-height: auto;\n    }\n  }
 
   /* ── Canvas particles ── */
   #contact-canvas {
@@ -66,8 +68,24 @@ const css = `
   .ct-header {
     position: relative;
     z-index: 2;
+    width: 100%;
     max-width: 1100px;
     margin: 0 auto 4rem;
+    box-sizing: border-box;
+    padding: 0 1rem;
+  }
+  @media(max-width: 768px) {
+    .ct-header {
+      max-width: 100%;
+      padding: 0 0.75rem;
+    }
+  }
+  @media(max-width: 480px) {
+    .ct-header {
+      max-width: 100%;
+      padding: 0 0.5rem;
+      margin: 0 auto 2rem;
+    }
   }
   .ct-tag {
     display: inline-block;
@@ -87,7 +105,7 @@ const css = `
     to   { box-shadow: 0 0 20px rgba(0,212,255,0.6), 0 0 40px rgba(0,212,255,0.2); }
   }
   .ct-title {
-    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-size: clamp(2rem, 7vw, 5.5rem);
     font-weight: 800;
     line-height: 1;
     letter-spacing: -0.03em;
@@ -98,6 +116,19 @@ const css = `
     background-size: 200% 200%;
     animation: titleShift 5s ease-in-out infinite alternate;
     margin: 0;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  @media(max-width:640px) {
+    .ct-title {
+      font-size: clamp(1.8rem, 4vw, 3.5rem) !important;
+    }
+  }
+  @media(max-width:480px) {
+    .ct-title {
+      font-size: clamp(1.4rem, 3vw, 2.5rem) !important;
+    }
   }
   @keyframes titleShift {
     from { background-position: 0% 50%; }
@@ -121,9 +152,22 @@ const css = `
     grid-template-columns: 1fr 1.3fr;
     gap: 3rem;
     align-items: start;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 1rem;
   }
   @media (max-width: 768px) {
-    .ct-grid { grid-template-columns: 1fr; }
+    .ct-grid { 
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 0 0.75rem;
+    }
+  }
+  @media (max-width: 480px) {
+    .ct-grid { 
+      gap: 1.5rem;
+      padding: 0 0.5rem;
+    }
   }
 
   /* ── Info cards ── */
@@ -140,6 +184,22 @@ const css = `
     position: relative;
     overflow: hidden;
     margin-bottom: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  @media(max-width:768px) {
+    .info-card {
+      padding: 1rem 1.2rem;
+      gap: 0.9rem;
+    }
+  }
+  @media(max-width:480px) {
+    .info-card {
+      padding: 0.8rem 1rem;
+      gap: 0.8rem;
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
   .info-card::before {
     content: '';
@@ -166,6 +226,13 @@ const css = `
     flex-shrink: 0;
     transition: all 0.3s;
   }
+  @media(max-width:480px) {
+    .info-icon {
+      width: 40px;
+      height: 40px;
+      font-size: 0.95rem;
+    }
+  }
   .info-card:hover .info-icon {
     background: rgba(0,212,255,0.2);
     box-shadow: 0 0 20px rgba(0,212,255,0.4);
@@ -178,12 +245,30 @@ const css = `
     color: rgba(255,255,255,0.3);
     margin-bottom: 0.2rem;
   }
+  @media(max-width:480px) {
+    .info-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+    }
+  }
   .info-value {
     font-size: 0.95rem;
     color: rgba(255,255,255,0.85);
     font-weight: 600;
     text-decoration: none;
     transition: color 0.2s;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+  @media(max-width:768px) {
+    .info-value {
+      font-size: 0.85rem;
+    }
+  }
+  @media(max-width:480px) {
+    .info-value {
+      font-size: 0.75rem;
+    }
   }
   a.info-value:hover { color: #00d4ff; }
 
@@ -193,6 +278,12 @@ const css = `
     gap: 0.9rem;
     margin-top: 1.8rem;
     flex-wrap: wrap;
+  }
+  @media(max-width:480px) {
+    .socials-row {
+      gap: 0.6rem;
+      margin-top: 1.2rem;
+    }
   }
   .social-btn {
     position: relative;
@@ -207,6 +298,14 @@ const css = `
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.23,1,0.32,1);
     overflow: hidden;
+  }
+  @media(max-width:480px) {
+    .social-btn {
+      width: 48px;
+      height: 48px;
+      font-size: 1rem;
+      border-radius: 12px;
+    }
   }
   .social-btn::after {
     content: attr(data-label);
@@ -243,6 +342,18 @@ const css = `
     transform-style: preserve-3d;
     transition: transform 0.15s ease-out, box-shadow 0.4s;
     will-change: transform;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  @media(max-width:768px) {
+    .form-card {
+      padding: 1.8rem;
+    }
+  }
+  @media(max-width:480px) {
+    .form-card {
+      padding: 1.2rem;
+    }
   }
   .form-card::before {
     content: '';
@@ -266,6 +377,11 @@ const css = `
     position: relative;
     margin-bottom: 1.4rem;
   }
+  @media(max-width:480px) {
+    .field-wrap {
+      margin-bottom: 1rem;
+    }
+  }
   .field-wrap label {
     position: absolute;
     left: 1.1rem;
@@ -276,6 +392,12 @@ const css = `
     pointer-events: none;
     transition: all 0.3s cubic-bezier(0.23,1,0.32,1);
     font-family: 'Space Mono', monospace;
+  }
+  @media(max-width:480px) {
+    .field-wrap label {
+      font-size: 0.8rem;
+      left: 0.8rem;
+    }
   }
   .field-wrap.textarea-wrap label {
     top: 1.2rem;
@@ -305,6 +427,13 @@ const css = `
     transition: all 0.35s cubic-bezier(0.23,1,0.32,1);
     position: relative;
     z-index: 1;
+    box-sizing: border-box;
+  }
+  @media(max-width:480px) {
+    .ct-input {
+      padding: 0.75rem 0.8rem;
+      font-size: 0.85rem;
+    }
   }
   .ct-input::placeholder { color: transparent; }
   .ct-input:focus {
@@ -316,6 +445,11 @@ const css = `
     resize: none;
     min-height: 140px;
     padding-top: 1rem;
+  }
+  @media(max-width:480px) {
+    textarea.ct-input {
+      min-height: 100px;
+    }
   }
 
   /* ── Submit button ── */
@@ -334,6 +468,13 @@ const css = `
     cursor: pointer;
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.23,1,0.32,1);
+    box-sizing: border-box;
+  }
+  @media(max-width:480px) {
+    .ct-submit {
+      padding: 0.8rem;
+      font-size: 0.9rem;
+    }
   }
   .ct-submit::before {
     content: '';
@@ -387,7 +528,7 @@ const css = `
 
   /* ── Availability badge ── */
   .avail-badge {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 0.5rem;
     margin-top: 2rem;
@@ -398,6 +539,11 @@ const css = `
     font-size: 0.75rem;
     font-family: 'Space Mono', monospace;
     color: rgba(255,255,255,0.5);
+    flex-wrap: wrap;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    width: 100%;
+    max-width: 300px;
   }
   .avail-dot {
     width: 8px; height: 8px;

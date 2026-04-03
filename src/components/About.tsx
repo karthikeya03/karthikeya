@@ -21,8 +21,28 @@ const css = `
 #about-root * { box-sizing: border-box; }
 #about-root {
   position: relative; overflow: hidden;
-  padding: 7rem 1.5rem 6rem;
+  padding: 7rem 2rem 6rem;
   font-family: 'Syne', sans-serif;
+}
+@media(max-width:1024px){
+  #about-root{
+    padding: 6rem 1.5rem 5rem;
+  }
+}
+@media(max-width:768px){
+  #about-root{
+    padding: 5rem 1.25rem 4rem;
+  }
+}
+@media(max-width:640px){
+  #about-root{
+    padding: 3.5rem 1rem 3rem;
+  }
+}
+@media(max-width:480px){
+  #about-root{
+    padding: 2.5rem 0.75rem 2rem;
+  }
 }
 
 /* ── Noise texture overlay ── */
@@ -48,10 +68,32 @@ const css = `
 /* ── Inner ── */
 .about-inner {
   position:relative; z-index:1;
-  max-width:1200px; margin:0 auto;
-  display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;
+  width: 100%;
+  max-width:1200px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5rem;
+  align-items:center;
+  box-sizing: border-box;
 }
-@media(max-width:900px){ .about-inner{ grid-template-columns:1fr; gap:3rem; } }
+@media(max-width:1024px){
+  .about-inner{
+    gap: 3rem;
+  }
+}
+@media(max-width:768px){
+  .about-inner{
+    grid-template-columns:1fr;
+    gap:2.5rem;
+  }
+}
+@media(max-width:640px){
+  .about-inner{
+    grid-template-columns:1fr;
+    gap:2rem;
+  }
+}
 
 /* ── LEFT ── */
 .about-left { display:flex; flex-direction:column; gap:2rem; }
@@ -67,12 +109,18 @@ const css = `
 /* heading */
 .about-heading {
   font-family:'Syne',sans-serif;
-  font-size:clamp(3rem,6vw,5rem);
+  font-size:clamp(2rem,6vw,5rem);
   font-weight:800;
   line-height:0.95; letter-spacing:0.04em;
   background:linear-gradient(135deg,#ffffff 0%,#00d4ff 60%,#a78bfa 100%);
   -webkit-background-clip:text; -webkit-text-fill-color:transparent;
   background-clip:text;
+  word-break: break-word;
+}
+@media(max-width:640px){
+  .about-heading{
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
 }
 
 /* bio paragraph */
@@ -81,6 +129,20 @@ const css = `
   color:rgba(255,255,255,0.5);
   border-left:1px solid rgba(255,255,255,0.08);
   padding-left:1.25rem;
+  word-break: break-word;
+}
+@media(max-width:768px){
+  .about-bio{
+    font-size: 0.95rem;
+    line-height: 1.7;
+    padding-left: 1rem;
+  }
+}
+@media(max-width:640px){
+  .about-bio{
+    font-size: 0.9rem;
+    padding-left: 0.75rem;
+  }
 }
 .about-bio strong { color:rgba(255,255,255,0.85); font-weight:700; }
 
@@ -111,6 +173,22 @@ const css = `
 .about-right {
   display:grid; grid-template-columns:1fr 1fr; gap:1rem;
 }
+@media(max-width:768px){
+  .about-right{
+    gap: 1.25rem;
+  }
+}
+@media(max-width:640px){
+  .about-right{
+    gap: 1rem;
+  }
+}
+@media(max-width:480px){
+  .about-right{
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
 
 .stat-card-3d {
   position:relative; overflow:hidden;
@@ -123,6 +201,22 @@ const css = `
   transform-style:preserve-3d;
   will-change:transform;
   text-decoration:none; display:block;
+  word-break: break-word;
+}
+@media(max-width:768px){
+  .stat-card-3d{
+    padding: 1.5rem 1.25rem;
+  }
+}
+@media(max-width:640px){
+  .stat-card-3d{
+    padding: 1.25rem 1rem;
+  }
+}
+@media(max-width:480px){
+  .stat-card-3d{
+    padding: 1rem 0.75rem;
+  }
 }
 /* top accent line */
 .stat-card-3d::before {
@@ -157,12 +251,17 @@ const css = `
 
 .sc-val {
   font-family:'Bebas Neue',sans-serif;
-  font-size:3rem; line-height:1;
+  font-size:clamp(2rem, 5vw, 3rem); line-height:1;
   letter-spacing:0.04em;
   background:linear-gradient(135deg, var(--cc), #fff 70%);
   -webkit-background-clip:text; -webkit-text-fill-color:transparent;
   background-clip:text;
   position:relative; z-index:1;
+}
+@media(max-width:640px){
+  .sc-val{
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
 }
 
 .sc-counter-wrap { display:flex; align-items:baseline; gap:0.15rem; }
@@ -173,6 +272,17 @@ const css = `
   color:rgba(255,255,255,0.8);
   margin-top:0.25rem;
   position:relative; z-index:1;
+  word-break: break-word;
+}
+@media(max-width:768px){
+  .sc-label{
+    font-size: 0.85rem;
+  }
+}
+@media(max-width:640px){
+  .sc-label{
+    font-size: 0.8rem;
+  }
 }
 .sc-sub {
   font-family:'DM Mono',monospace; font-size:0.65rem;

@@ -110,7 +110,7 @@ function AchCard({ a, visible }: { a: typeof achievements[0]; visible: boolean }
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => { setHov(false); setPos({ mx: 50, my: 50, rx: 0, ry: 0 }); }}
       style={{
-        position: 'relative', borderRadius: 20, padding: '26px 24px',
+        position: 'relative', borderRadius: 20, padding: 'clamp(20px, 5vw, 26px) clamp(18px, 4vw, 24px)',
         background: hov ? 'rgba(255,255,255,.045)' : 'rgba(255,255,255,.025)',
         height: '100%', display: 'flex', flexDirection: 'column',
         transform: hov
@@ -243,6 +243,71 @@ export default function Achievements() {
       @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
       @keyframes achPulseRing { 0% { transform:scale(1); opacity:.7; } 100% { transform:scale(2.4); opacity:0; } }
       @keyframes achBgFloat   { 0%,100%{transform:translate(0,0)} 50%{transform:translate(20px,-26px)} }
+      
+      .ach-section {
+        padding: 90px 40px !important;
+      }
+      
+      .ach-grid {
+        gap: 20px !important;
+      }
+      
+      @media(max-width:1024px) {
+        .ach-section {
+          padding: 80px 30px !important;
+        }
+        .ach-grid {
+          grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important;
+          gap: 16px !important;
+        }
+      }
+      
+      @media(max-width:768px) {
+        .ach-section {
+          padding: 60px 20px !important;
+        }
+        .ach-grid {
+          grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+          gap: 12px !important;
+        }
+      }
+      
+      @media(max-width:640px) {
+        .ach-section {
+          padding: 40px 15px !important;
+        }
+        .ach-grid {
+          grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
+          gap: 10px !important;
+        }
+      }
+      
+      @media(max-width:480px) {
+        .ach-section {
+          padding: 30px 10px !important;
+        }
+        .ach-grid {
+          grid-template-columns: 1fr !important;
+          gap: 10px !important;
+        }
+      }
+      
+      .ach-header-h2 {
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+        width: 100% !important;
+      }
+      @media(max-width:640px) {
+        .ach-header-h2 {
+          font-size: clamp(1.8rem, 4vw, 3.5rem) !important;
+        }
+      }
+      @media(max-width:480px) {
+        .ach-header-h2 {
+          font-size: clamp(1.4rem, 3vw, 2.5rem) !important;
+        }
+      }
     `;
     document.head.appendChild(s);
     return () => { document.getElementById('ach2-styles')?.remove(); };
@@ -250,7 +315,15 @@ export default function Achievements() {
 
   return (
     <section id="achievements" ref={sectionRef}
-      style={{ position: 'relative', padding: '90px 40px', maxWidth: 1400, margin: '0 auto' }}>
+      className="ach-section"
+      style={{ 
+        position: 'relative', 
+        padding: '90px 40px', 
+        width: '100%',
+        maxWidth: 1400, 
+        margin: '0 auto',
+        boxSizing: 'border-box'
+      }}>
 
       <div style={{ position: 'absolute', top: -60, left: '8%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle,rgba(255,215,0,.05) 0%,transparent 70%)', filter: 'blur(70px)', pointerEvents: 'none', animation: 'achBgFloat 13s ease-in-out infinite' }} />
       <div style={{ position: 'absolute', bottom: -40, right: '6%', width: 340, height: 340, borderRadius: '50%', background: 'radial-gradient(circle,rgba(0,255,229,.04) 0%,transparent 70%)', filter: 'blur(70px)', pointerEvents: 'none', animation: 'achBgFloat 17s ease-in-out infinite reverse' }} />
@@ -262,13 +335,16 @@ export default function Achievements() {
           <div style={{ width: 28, height: 1, background: '#ffd700', boxShadow: '0 0 8px #ffd700' }} />
           <span style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase' as const, color: '#ffd700', opacity: .7, fontWeight: 500, fontFamily: 'ui-monospace,monospace' }}>Recognition</span>
         </div>
-        <h2 style={{
+        <h2 className="ach-header-h2" style={{
           fontFamily: 'Syne,sans-serif', fontWeight: 800, lineHeight: 1, margin: 0, padding: 0,
           fontSize: 'clamp(2.4rem, 5.5vw, 5rem)',
           background: 'linear-gradient(100deg,#ffd700 0%,#fffbe6 45%,#00ffe5 100%)',
           WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
           opacity: headerVis ? 1 : 0, transform: headerVis ? 'none' : 'translateY(28px)',
           transition: 'all .9s cubic-bezier(.16,1,.3,1) .1s',
+          overflowWrap: 'break-word',
+          wordBreak: 'break-word',
+          width: '100%',
         }}>ACHIEVEMENTS.</h2>
         <p style={{ marginTop: 14, fontSize: 13.5, color: 'rgba(255,255,255,.33)', maxWidth: 460, lineHeight: 1.7, fontWeight: 300, opacity: headerVis ? 1 : 0, transition: 'opacity .8s .3s' }}>
           Milestones, rankings and wins across competitive programming and hackathons.
@@ -276,7 +352,7 @@ export default function Achievements() {
       </div>
 
       {/* Grid — gridAutoRows: 1fr makes every row the same height */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(280px,1fr))', gridAutoRows: '1fr', gap: 20, position: 'relative', zIndex: 1 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(280px,1fr))', gridAutoRows: '1fr', gap: 20, position: 'relative', zIndex: 1 }} className="ach-grid">
         {achievements.map((a, i) => (
           <div key={a.title} className="ach2-obs" data-idx={i} style={{
             opacity: cardVis[i] ? 1 : 0,

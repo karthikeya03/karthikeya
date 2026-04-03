@@ -160,7 +160,7 @@ function SkillCard({ s, delay, visible }: { s: SkillDef; delay: number; visible:
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       style={{
-        position: 'relative', borderRadius: 20, padding: 32, cursor: 'pointer',
+        position: 'relative', borderRadius: 20, padding: 'clamp(20px, 6vw, 32px)', cursor: 'pointer',
         background: 'rgba(255,255,255,.03)',
         transformStyle: 'preserve-3d',
         transform: tilt.hovered
@@ -335,6 +335,52 @@ export default function SkillsSection() {
       @keyframes floatDot1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(8px,-12px) scale(1.1)} }
       @keyframes floatDot2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-6px,10px) scale(.9)} }
       @keyframes floatDot3 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(10px,6px) scale(1.05)} }
+      
+      .skills-section {
+        padding: 80px 40px !important;
+      }
+      .skills-grid {
+        gap: 24px !important;
+      }
+      
+      @media(max-width:1024px) {
+        .skills-section {
+          padding: 70px 30px !important;
+        }
+        .skills-grid {
+          gap: 20px !important;
+        }
+      }
+      
+      @media(max-width:768px) {
+        .skills-section {
+          padding: 60px 20px !important;
+        }
+        .skills-grid {
+          grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important;
+          gap: 16px !important;
+        }
+      }
+      
+      @media(max-width:640px) {
+        .skills-section {
+          padding: 40px 15px !important;
+        }
+        .skills-grid {
+          grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+          gap: 12px !important;
+        }
+      }
+      
+      @media(max-width:480px) {
+        .skills-section {
+          padding: 30px 10px !important;
+        }
+        .skills-grid {
+          grid-template-columns: 1fr !important;
+          gap: 12px !important;
+        }
+      }
     `;
     document.head.appendChild(style);
     return () => {
@@ -343,7 +389,17 @@ export default function SkillsSection() {
   }, []);
 
   return (
-    <section id="skills" style={{ position: 'relative', padding: '80px 40px', maxWidth: 1400, margin: '0 auto' }} ref={sectionRef}>
+    <section id="skills" className="skills-section"
+      style={{ 
+        position: 'relative', 
+        padding: '80px 40px', 
+        width: '100%',
+        maxWidth: '1400px', 
+        margin: '0 auto',
+        boxSizing: 'border-box'
+      }} 
+      ref={sectionRef}
+    >
       <ParticleCanvas />
 
       {/* Section Header */}
@@ -378,7 +434,8 @@ export default function SkillsSection() {
       <div style={{
         display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(300px,1fr))',
         gap: 24, position: 'relative', zIndex: 1,
-      }}>
+      }}
+      className="skills-grid">
         {SKILLS.map((s, i) => (
           <div key={s.cat} className="skill-card-obs" data-idx={i}>
             <SkillCard s={s} delay={i * 80} visible={cardVisible[i]} />

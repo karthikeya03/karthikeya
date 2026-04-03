@@ -20,7 +20,7 @@ const Index = () => {
       {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
       <CustomCursor />
       <Navbar />
-      <main>
+      <main style={{ width: '100%', overflowX: 'hidden' }}>
         <Hero />
         <About />
         <Skills />

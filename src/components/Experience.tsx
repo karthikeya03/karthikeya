@@ -63,6 +63,8 @@ const STYLE = `
     overflow: hidden;
     background: #0a0a0a;
   }
+  @media(max-width:1024px){
+    .exp-wrap{\n      padding: 5rem 1.5rem;\n    }\n  }\n  @media(max-width:768px){\n    .exp-wrap{\n      padding: 4rem 1.25rem;\n    }\n  }\n  @media(max-width:640px){\n    .exp-wrap{\n      padding: 3rem 1rem;\n    }\n  }\n  @media(max-width:480px){\n    .exp-wrap{\n      padding: 2rem 0.75rem;\n      min-height: auto;\n    }\n  }
 
   .exp-canvas {
     position: absolute;
@@ -92,8 +94,10 @@ const STYLE = `
   .exp-inner {
     position: relative;
     z-index: 1;
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    box-sizing: border-box;
   }
 
   .exp-header {
@@ -122,13 +126,14 @@ const STYLE = `
 
   .exp-title {
     font-family: 'Syne', sans-serif;
-    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-size: clamp(2rem, 7vw, 5.5rem);
     font-weight: 800;
     line-height: 1;
     position: relative;
     display: inline-block;
     color: #fff;
     cursor: default;
+    word-break: break-word;
   }
   .exp-title::before,
   .exp-title::after {

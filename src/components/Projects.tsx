@@ -95,22 +95,49 @@ const tagColors: Record<string, string> = {
 const css = `
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap');
 
-#proj-root * { box-sizing:border-box; }
-#proj-root {
+#projects * { box-sizing:border-box; }
+#projects {
   position:relative; overflow:hidden;
-  padding:7rem 1.5rem 6rem;
+  padding:7rem 2rem 6rem;
   font-family:'Syne',sans-serif;
+}
+@media(max-width:1024px){
+  #projects{
+    padding: 6rem 1.5rem 5rem;
+  }
+}
+@media(max-width:768px){
+  #projects{
+    padding: 5rem 1.25rem 4rem;
+  }
+}
+@media(max-width:640px){
+  #projects{
+    padding: 3.5rem 1rem 3rem;
+  }
+}
+@media(max-width:480px){
+  #projects{
+    padding: 2.5rem 0.75rem 2rem;
+  }
 }
 
 /* ── ambient ── */
-#proj-root::before {
+#projects::before {
   content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
   background:
     radial-gradient(ellipse 60% 40% at 10% 20%, rgba(0,212,255,0.05) 0%, transparent 60%),
     radial-gradient(ellipse 50% 40% at 90% 80%, rgba(245,166,35,0.05) 0%, transparent 60%);
 }
 
-.proj-inner { position:relative; z-index:1; max-width:1300px; margin:0 auto; }
+.proj-inner {
+  position:relative;
+  z-index:1;
+  width: 100%;
+  max-width:1300px;
+  margin:0 auto;
+  box-sizing: border-box;
+}
 
 /* ── header ── */
 .proj-header {
@@ -125,11 +152,17 @@ const css = `
 }
 .proj-heading {
   font-family:'Syne',sans-serif;
-  font-size:clamp(3rem,6vw,5rem); font-weight:800; line-height:0.95;
+  font-size:clamp(2rem,6vw,5rem); font-weight:800; line-height:0.95;
   letter-spacing:0.04em;
   background:linear-gradient(135deg,#ffffff,#f5a623 60%,#ff6b35 100%);
   -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
   margin:0;
+  word-break: break-word;
+}
+@media(max-width:640px){
+  .proj-heading{
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
 }
 
 /* ── filter pills ── */
@@ -161,6 +194,30 @@ const css = `
   display:grid;
   grid-template-columns:repeat(auto-fill, minmax(320px,1fr));
   gap:1.25rem;
+}
+@media(max-width:1024px){
+  .proj-grid{
+    grid-template-columns:repeat(auto-fill, minmax(280px,1fr));
+    gap: 1rem;
+  }
+}
+@media(max-width:768px){
+  .proj-grid{
+    grid-template-columns:repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+}
+@media(max-width:640px){
+  .proj-grid{
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+@media(max-width:480px){
+  .proj-grid{
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
 }
 
 /* ── card ── */
@@ -205,6 +262,25 @@ const css = `
 .card-body {
   position:relative; z-index:1;
   padding:1.75rem; display:flex; flex-direction:column; gap:1.1rem; flex:1;
+  word-break: break-word;
+}
+@media(max-width:768px){
+  .card-body{
+    padding: 1.5rem 1.25rem;
+    gap: 1rem;
+  }
+}
+@media(max-width:640px){
+  .card-body{
+    padding: 1.25rem 1rem;
+    gap: 0.75rem;
+  }
+}
+@media(max-width:480px){
+  .card-body{
+    padding: 1rem 0.75rem;
+    gap: 0.6rem;
+  }
 }
 
 
@@ -217,6 +293,17 @@ const css = `
   font-size:1.1rem; font-weight:700; color:#fff;
   letter-spacing:0.02em; line-height:1.2;
   flex:1;
+  word-break: break-word;
+}
+@media(max-width:768px){
+  .card-title{
+    font-size: 1rem;
+  }
+}
+@media(max-width:640px){
+  .card-title{
+    font-size: 0.95rem;
+  }
 }
 .card-tag {
   font-family:'DM Mono',monospace; font-size:0.62rem; letter-spacing:0.12em;
@@ -230,6 +317,19 @@ const css = `
   font-size:0.875rem; line-height:1.7;
   color:rgba(255,255,255,0.45);
   flex:1;
+  word-break: break-word;
+}
+@media(max-width:768px){
+  .card-desc{
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+}
+@media(max-width:640px){
+  .card-desc{
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
 }
 
 /* tech pills */
@@ -345,7 +445,7 @@ const Projects = () => {
   return (
     <>
       <style>{css}</style>
-      <section id="proj-root">
+      <section id="projects">
         <div className="proj-inner">
           <div className="proj-header">
             <div>

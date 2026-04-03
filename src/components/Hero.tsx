@@ -65,15 +65,40 @@ const css = `
 /* ── Layout ── */
 .hero-inner {
   position: relative; z-index: 2;
-  max-width: 1300px; margin: 0 auto;
-  padding: 6rem 1.5rem 6rem;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   align-items: center;
   min-height: 100vh;
+  box-sizing: border-box;
 }
-@media(max-width:900px){ .hero-inner{ grid-template-columns:1fr; padding-top:5rem; padding-bottom:5rem; } }
+@media(max-width:1024px){ .hero-inner{ gap: 1.5rem; padding: 5rem 1.5rem; } }
+@media(max-width:768px){
+  .hero-inner{
+    grid-template-columns:1fr;
+    padding: 5.5rem 1.25rem 3rem;
+    gap: 1.5rem;
+    min-height: auto;
+  }
+}
+@media(max-width:640px){
+  .hero-inner{
+    grid-template-columns:1fr;
+    padding: 5rem 1rem 2rem;
+    gap: 1rem;
+    min-height: auto;
+  }
+}
+@media(max-width:480px){
+  .hero-inner{
+    padding: 5rem 0.75rem 1.5rem;
+    gap: 0.8rem;
+  }
+}
 
 /* ── Left ── */
 .hero-left { display:flex; flex-direction:column; gap:1.4rem; }
@@ -89,6 +114,10 @@ const css = `
   color: rgba(255,255,255,0.55);
   width: fit-content;
   animation: heroFadeUp 0.8s ease both;
+  position: relative;
+  z-index: 10;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 .hero-badge-dot {
   width:8px; height:8px; border-radius:50%; background:#00ff88;
@@ -106,12 +135,18 @@ const css = `
 }
 .hero-name {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(3rem, 6.5vw, 6rem);
+  font-size: clamp(2rem, 6.5vw, 6rem);
   line-height: 0.95;
   letter-spacing: 0.04em;
   color: #fff;
   position: relative;
   display: inline-block;
+  word-break: break-word;
+}
+@media(max-width:640px){
+  .hero-name{
+    font-size: clamp(1.5rem, 5.5vw, 2.5rem);
+  }
 }
 .hero-name::before,
 .hero-name::after {
@@ -150,13 +185,20 @@ const css = `
 
 /* ── Role ── */
 .hero-role {
-  font-size: clamp(1.1rem,2.5vw,1.5rem);
+  font-size: clamp(0.95rem,2.5vw,1.5rem);
   font-weight: 700;
   letter-spacing: 0.06em;
   color: #f5a623;
   text-shadow: 0 0 20px rgba(245,166,35,0.5), 0 0 40px rgba(245,166,35,0.2);
   animation: heroFadeUp 0.8s 0.2s ease both;
   display: flex; align-items: center; gap: 0.6rem;
+  flex-wrap: wrap;
+}
+@media(max-width:640px){
+  .hero-role{
+    font-size: 0.9rem;
+    gap: 0.4rem;
+  }
 }
 .role-slash { color: rgba(255,255,255,0.2); font-weight: 300; }
 
@@ -172,10 +214,18 @@ const css = `
 /* ── Typewriter ── */
 .hero-typewriter {
   font-family: 'DM Mono', monospace;
-  font-size: clamp(1rem,2vw,1.25rem);
-  height: 2rem;
+  font-size: clamp(0.8rem,2vw,1.25rem);
+  height: auto;
+  min-height: 2rem;
   display: flex; align-items: center; gap: 0.25rem;
   animation: heroFadeUp 0.8s 0.4s ease both;
+  flex-wrap: wrap;
+}
+@media(max-width:640px){
+  .hero-typewriter{
+    font-size: 0.75rem;
+    height: auto;
+  }
 }
 .tw-prefix { color:rgba(255,255,255,0.25); }
 .tw-text   { transition: color 0.4s; }
@@ -194,6 +244,26 @@ const css = `
   animation: heroFadeUp 0.8s 0.5s ease both;
   padding-top: 0.4rem;
 }
+@media(max-width:768px){
+  .hero-ctas{
+    gap: 0.9rem;
+  }
+}
+@media(max-width:640px){
+  .hero-ctas{
+    gap: 0.75rem;
+    flex-direction: column;
+  }
+  .hero-ctas > * {
+    width: 100%;
+    justify-content: center;
+  }
+}
+@media(max-width:480px){
+  .hero-ctas{
+    gap: 0.6rem;
+  }
+}
 
 /* PRIMARY — gold fire button */
 .cta-primary {
@@ -209,6 +279,26 @@ const css = `
   animation: btnBgShift 3s ease infinite;
   transition: transform 0.3s cubic-bezier(0.23,1,0.32,1), box-shadow 0.35s;
   box-shadow: 0 4px 20px rgba(245,166,35,0.3), inset 0 1px 0 rgba(255,255,255,0.25);
+  white-space: nowrap;
+}
+@media(max-width:768px){
+  .cta-primary{
+    padding: 0.9rem 1.8rem;
+    font-size: 0.95rem;
+  }
+}
+@media(max-width:640px){
+  .cta-primary{
+    padding: 0.85rem 1.5rem;
+    font-size: 0.9rem;
+    gap: 0.5rem;
+  }
+}
+@media(max-width:480px){
+  .cta-primary{
+    padding: 0.8rem 1.2rem;
+    font-size: 0.85rem;
+  }
 }
 @keyframes btnBgShift {
   0%,100% { background-position:0% 50%; }
@@ -261,6 +351,26 @@ const css = `
   border: 1px solid transparent;
   background-clip: padding-box;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12), 0 4px 16px rgba(0,0,0,0.3);
+  white-space: nowrap;
+}
+@media(max-width:768px){
+  .cta-secondary{
+    padding: 0.9rem 1.8rem;
+    font-size: 0.95rem;
+  }
+}
+@media(max-width:640px){
+  .cta-secondary{
+    padding: 0.85rem 1.5rem;
+    font-size: 0.9rem;
+    gap: 0.5rem;
+  }
+}
+@media(max-width:480px){
+  .cta-secondary{
+    padding: 0.8rem 1.2rem;
+    font-size: 0.85rem;
+  }
 }
 /* animated border ring */
 .cta-secondary::before {

@@ -35,10 +35,22 @@
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+    width: 100%;
+    overflow-x: hidden;
+  }
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', sans-serif;
     cursor: none;
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  main {
+    width: 100%;
     overflow-x: hidden;
   }
   h1, h2, h3, h4, h5, h6 {
@@ -46,9 +58,6 @@
   }
   code, .mono {
     font-family: 'JetBrains Mono', monospace;
-  }
-  html {
-    scroll-behavior: smooth;
   }
 }
 
