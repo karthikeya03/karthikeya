@@ -618,7 +618,7 @@ const Hero = () => {
                 View Projects
               </a>
               <a
-                href="https://drive.google.com/file/d/1a8K2257qYf_wDmVMkobeFE1q1FmombTa/view?usp=sharing"
+                href="https://drive.google.com/file/d/1Wiw9VPLHhbg_UEFy4xFPcrsXcBjcrtDa/view?usp=drive_link"
                 target="_blank" rel="noopener noreferrer"
                 className="cta-secondary"
               >
@@ -643,7 +643,7 @@ const Hero = () => {
               <div className="profile-ring-outer" />
               <div className="profile-ring-mid" />
               <img
-                src="src\public\2026.png"
+                src="/2026.png"
                 alt="Karthikeya"
                 className="profile-img"
               />
