@@ -39,7 +39,7 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 glassmorphism transition-transform duration-300 ${hidden ? '-translate-y-full' : 'translate-y-0'}`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex items-center justify-between gap-3">
         <a href="#" className="text-lg sm:text-xl font-heading font-bold gradient-text whitespace-nowrap">
           SSK
         </a>
@@ -57,7 +57,7 @@ const Navbar = () => {
           ))}
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-4">
+        <div className="flex items-center gap-2 sm:gap-4 shrink-0">
           <a href="https://github.com/karthikeya03" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-gold transition-colors text-sm sm:text-base">
             <i className="fab fa-github" />
           </a>
@@ -72,7 +72,7 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="lg:hidden px-4 pb-4 flex flex-col gap-2">
+        <div className="lg:hidden px-4 pb-4 flex flex-col gap-2 border-t border-white/5 bg-black/95">
           {links.map(l => (
             <a
               key={l.href}

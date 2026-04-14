@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import CustomCursor from '@/components/CustomCursor';
 import LoadingScreen from '@/components/LoadingScreen';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
@@ -18,7 +17,6 @@ const Index = () => {
   return (
     <>
       {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
-      <CustomCursor />
       <Navbar />
       <main style={{ width: '100%', overflowX: 'hidden' }}>
         <Hero />

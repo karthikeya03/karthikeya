@@ -148,8 +148,10 @@ function SkillCard({ s, delay, visible }: { s: SkillDef; delay: number; visible:
   }, [visible]);
 
   const onMouseMove = (e: React.MouseEvent) => {
-    const r = cardRef.current!.getBoundingClientRect();
-    const cx = e.clientX - r.left, cy = e.clientY - r.top;
+    if (!cardRef.current) return;
+    const r = cardRef.current.getBoundingClientRect();
+    const cx = e.clientX - r.left;
+    const cy = e.clientY - r.top;
     setTilt({ x: (cy / r.height - 0.5) * -18, y: (cx / r.width - 0.5) * 18, mx: (cx / r.width) * 100, my: (cy / r.height) * 100, hovered: true });
   };
   const onMouseLeave = () => setTilt({ x: 0, y: 0, mx: 50, my: 50, hovered: false });
@@ -162,6 +164,10 @@ function SkillCard({ s, delay, visible }: { s: SkillDef; delay: number; visible:
       style={{
         position: 'relative', borderRadius: 20, padding: 'clamp(20px, 6vw, 32px)', cursor: 'pointer',
         background: 'rgba(255,255,255,.03)',
+        height: '100%',
+        minHeight: '340px',
+        display: 'flex',
+        flexDirection: 'column',
         transformStyle: 'preserve-3d',
         transform: tilt.hovered
           ? `perspective(800px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(1.03)`
@@ -281,7 +287,7 @@ function SkillCard({ s, delay, visible }: { s: SkillDef; delay: number; visible:
       </div>
 
       {/* progress bar */}
-      <div>
+      <div style={{ marginTop: 'auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8, fontSize: 11, color: 'rgba(255,255,255,.3)', letterSpacing: 1 }}>
           <span>Proficiency</span>
           <span>{s.progress}%</span>
@@ -299,7 +305,7 @@ function SkillCard({ s, delay, visible }: { s: SkillDef; delay: number; visible:
 }
 
 /* ─── Main Section ─── */
-export default function SkillsSection() {
+export default function Skills() {
   const [visible, setVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [cardVisible, setCardVisible] = useState<boolean[]>(Array(SKILLS.length).fill(false));
@@ -337,15 +343,16 @@ export default function SkillsSection() {
       @keyframes floatDot3 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(10px,6px) scale(1.05)} }
       
       .skills-section {
-        padding: 80px 40px !important;
+        padding: 96px 32px !important;
       }
       .skills-grid {
         gap: 24px !important;
+        grid-auto-rows: 1fr !important;
       }
       
       @media(max-width:1024px) {
         .skills-section {
-          padding: 70px 30px !important;
+          padding: 88px 24px !important;
         }
         .skills-grid {
           gap: 20px !important;
@@ -354,7 +361,7 @@ export default function SkillsSection() {
       
       @media(max-width:768px) {
         .skills-section {
-          padding: 60px 20px !important;
+          padding: 80px 20px !important;
         }
         .skills-grid {
           grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important;
@@ -364,7 +371,7 @@ export default function SkillsSection() {
       
       @media(max-width:640px) {
         .skills-section {
-          padding: 40px 15px !important;
+          padding: 64px 16px !important;
         }
         .skills-grid {
           grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
@@ -374,7 +381,7 @@ export default function SkillsSection() {
       
       @media(max-width:480px) {
         .skills-section {
-          padding: 30px 10px !important;
+          padding: 48px 12px !important;
         }
         .skills-grid {
           grid-template-columns: 1fr !important;
@@ -392,7 +399,7 @@ export default function SkillsSection() {
     <section id="skills" className="skills-section"
       style={{ 
         position: 'relative', 
-        padding: '80px 40px', 
+        padding: '96px 32px', 
         width: '100%',
         maxWidth: '1400px', 
         margin: '0 auto',
@@ -403,31 +410,21 @@ export default function SkillsSection() {
       <ParticleCanvas />
 
       {/* Section Header */}
-      <div style={{ marginBottom: 80, position: 'relative', zIndex: 1 }}>
-        <div style={{
-          fontSize: 12, letterSpacing: 6, color: '#00ffc8', textTransform: 'uppercase' as const,
-          marginBottom: 16, fontWeight: 500,
-          opacity: visible ? 1 : 0, transform: visible ? 'none' : 'translateY(20px)',
-          transition: 'all .8s cubic-bezier(.16,1,.3,1)',
-        }}>
-          What I Build With
+      <div
+        className="mb-12"
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          opacity: visible ? 1 : 0,
+          transform: visible ? 'none' : 'translateY(20px)',
+          transition: 'opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1)',
+        }}
+      >
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-8 h-px bg-cyan-500" />
+          <span className="font-mono text-sm uppercase tracking-widest text-cyan-400/70">What I Build With</span>
         </div>
-        <div style={{ lineHeight: .9, overflow: 'hidden' }}>
-          <span style={{
-            display: 'block', fontFamily: 'Syne,sans-serif', fontSize: 'clamp(60px,10vw,120px)',
-            fontWeight: 800, color: '#fff',
-            opacity: visible ? 1 : 0, transform: visible ? 'none' : 'translateY(100px)',
-            transition: 'all 1s cubic-bezier(.16,1,.3,1)',
-          }}>MY</span>
-          <span style={{
-            display: 'block', fontFamily: 'Syne,sans-serif', fontSize: 'clamp(60px,10vw,120px)',
-            fontWeight: 800,
-            background: 'linear-gradient(135deg,#00ffc8,#7b2fff)',
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-            opacity: visible ? 1 : 0, transform: visible ? 'none' : 'translateY(100px)',
-            transition: 'all 1s cubic-bezier(.16,1,.3,1) .15s',
-          }}>SKILLS.</span>
-        </div>
+        <h2 className="text-4xl sm:text-5xl font-bold text-gray-300">Skills.</h2>
       </div>
 
       {/* Cards Grid */}
@@ -437,8 +434,13 @@ export default function SkillsSection() {
       }}
       className="skills-grid">
         {SKILLS.map((s, i) => (
-          <div key={s.cat} className="skill-card-obs" data-idx={i}>
-            <SkillCard s={s} delay={i * 80} visible={cardVisible[i]} />
+          <div
+            key={i}
+            id={`skill-card-${i}`}
+            className="h-full skill-card-obs"
+            data-idx={i}
+          >
+            <SkillCard s={s} delay={i * 100} visible={!!cardVisible[i]} />
           </div>
         ))}
       </div>

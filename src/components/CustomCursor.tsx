@@ -1,30 +1,60 @@
 import { useEffect, useRef } from 'react';
 
-const CustomCursor = () => {
-  const dotRef = useRef<HTMLDivElement>(null);
-  const trailRef = useRef<HTMLDivElement>(null);
+export default function CustomCursor() {
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const followerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (dotRef.current) {
-        dotRef.current.style.left = `${e.clientX}px`;
-        dotRef.current.style.top = `${e.clientY}px`;
-      }
-      if (trailRef.current) {
-        trailRef.current.style.left = `${e.clientX}px`;
-        trailRef.current.style.top = `${e.clientY}px`;
-      }
+    const cursor = cursorRef.current;
+    const follower = followerRef.current;
+    if (!cursor || !follower) return;
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let followerX = 0;
+    let followerY = 0;
+    const speed = 0.1;
+
+    const onMouseMove = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
     };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+
+    const animate = () => {
+      const dx = mouseX - followerX;
+      const dy = mouseY - followerY;
+      followerX += dx * speed;
+      followerY += dy * speed;
+
+      if (cursor) {
+        cursor.style.transform = `translate3d(${mouseX - 6}px, ${mouseY - 6}px, 0)`;
+      }
+      if (follower) {
+        follower.style.transform = `translate3d(${followerX - 16}px, ${followerY - 16}px, 0)`;
+      }
+      requestAnimationFrame(animate);
+    };
+
+    window.addEventListener('mousemove', onMouseMove);
+    animate();
+
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+    };
   }, []);
 
   return (
     <>
-      <div ref={dotRef} className="cursor-glow hidden md:block" />
-      <div ref={trailRef} className="cursor-trail hidden md:block" />
+      <div
+        ref={cursorRef}
+        className="fixed w-3 h-3 bg-white rounded-full pointer-events-none z-50"
+        style={{ mixBlendMode: 'difference' }}
+      />
+      <div
+        ref={followerRef}
+        className="fixed w-8 h-8 border border-white rounded-full pointer-events-none z-50"
+        style={{ mixBlendMode: 'difference', transition: 'transform 0.1s ease-out' }}
+      />
     </>
   );
-};
-
-export default CustomCursor;
+}

@@ -16,13 +16,32 @@ const css = `
   #contact-section {
     position: relative;
     min-height: 100vh;
-    padding: 6rem 2rem 4rem;
+    padding: 6rem 2rem 6rem;
     overflow: hidden;
     font-family: 'Syne', sans-serif;
     background: transparent;
   }
   @media(max-width:1024px){
-    #contact-section{\n      padding: 5rem 1.5rem 3rem;\n    }\n  }\n  @media(max-width:768px){\n    #contact-section{\n      padding: 4rem 1.25rem 2.5rem;\n    }\n  }\n  @media(max-width:640px){\n    #contact-section{\n      padding: 3rem 1rem 2rem;\n    }\n  }\n  @media(max-width:480px){\n    #contact-section{\n      padding: 2rem 0.75rem 1.5rem;\n      min-height: auto;\n    }\n  }
+    #contact-section{
+      padding: 5.5rem 1.5rem 5.5rem;
+    }
+  }
+  @media(max-width:768px){
+    #contact-section{
+      padding: 5rem 1.25rem 5rem;
+    }
+  }
+  @media(max-width:640px){
+    #contact-section{
+      padding: 4rem 1rem 4rem;
+    }
+  }
+  @media(max-width:480px){
+    #contact-section{
+      padding: 3rem 0.75rem 3rem;
+      min-height: auto;
+    }
+  }
 
   /* ── Canvas particles ── */
   #contact-canvas {
@@ -36,26 +55,25 @@ const css = `
   .orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
     pointer-events: none;
     z-index: 0;
     animation: orbFloat 8s ease-in-out infinite alternate;
   }
   .orb-1 {
     width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(0,212,255,0.18) 0%, transparent 70%);
+    background: transparent;
     top: -100px; left: -100px;
     animation-delay: 0s;
   }
   .orb-2 {
     width: 350px; height: 350px;
-    background: radial-gradient(circle, rgba(245,166,35,0.15) 0%, transparent 70%);
+    background: transparent;
     bottom: -80px; right: -80px;
     animation-delay: -4s;
   }
   .orb-3 {
     width: 250px; height: 250px;
-    background: radial-gradient(circle, rgba(180,0,255,0.12) 0%, transparent 70%);
+    background: transparent;
     top: 40%; left: 50%;
     animation-delay: -2s;
   }
@@ -98,23 +116,18 @@ const css = `
     padding: 0.35rem 1rem;
     border-radius: 2rem;
     margin-bottom: 1.2rem;
-    animation: tagGlow 3s ease-in-out infinite alternate;
+    animation: none;
   }
   @keyframes tagGlow {
-    from { box-shadow: 0 0 8px rgba(0,212,255,0.2); }
-    to   { box-shadow: 0 0 20px rgba(0,212,255,0.6), 0 0 40px rgba(0,212,255,0.2); }
+    from { box-shadow: none; }
+    to   { box-shadow: none; }
   }
   .ct-title {
     font-size: clamp(2rem, 7vw, 5.5rem);
     font-weight: 800;
     line-height: 1;
     letter-spacing: -0.03em;
-    background: linear-gradient(135deg, #ffffff 0%, #00d4ff 50%, #f5a623 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    background-size: 200% 200%;
-    animation: titleShift 5s ease-in-out infinite alternate;
+    color: #ffffff;
     margin: 0;
     word-break: break-word;
     overflow-wrap: break-word;
@@ -205,7 +218,7 @@ const css = `
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(0,212,255,0.06) 0%, transparent 60%);
+    background: transparent;
     opacity: 0;
     transition: opacity 0.4s;
   }
@@ -235,7 +248,7 @@ const css = `
   }
   .info-card:hover .info-icon {
     background: rgba(0,212,255,0.2);
-    box-shadow: 0 0 20px rgba(0,212,255,0.4);
+    box-shadow: none;
   }
   .info-label {
     font-size: 0.7rem;
@@ -359,7 +372,7 @@ const css = `
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(0,212,255,0.07) 0%, rgba(245,166,35,0.04) 50%, transparent 100%);
+    background: transparent;
     border-radius: inherit;
     pointer-events: none;
   }
@@ -368,7 +381,7 @@ const css = `
     position: absolute;
     top: -1px; left: -1px; right: -1px;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #00d4ff, #f5a623, transparent);
+    background: transparent;
     border-radius: 1.75rem 1.75rem 0 0;
   }
 
@@ -459,7 +472,7 @@ const css = `
     padding: 1.1rem;
     border: none;
     border-radius: 0.875rem;
-    background: linear-gradient(135deg, #f5a623, #ff6b35);
+    background: #f5a623;
     color: #0d0d0f;
     font-size: 1rem;
     font-weight: 700;
@@ -481,17 +494,17 @@ const css = `
     position: absolute;
     top: 0; left: -100%;
     width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    background: transparent;
     transition: left 0.5s;
   }
   .ct-submit:hover::before { left: 100%; }
   .ct-submit:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(245,166,35,0.4), 0 0 60px rgba(245,166,35,0.2);
+    box-shadow: 0 12px 35px rgba(245,166,35,0.4);
   }
   .ct-submit:active { transform: translateY(0); }
   .ct-submit.sent {
-    background: linear-gradient(135deg, #00d4ff, #00ff88);
+    background: #00d4ff;
     animation: sentPulse 0.6s ease;
   }
   @keyframes sentPulse {
@@ -721,9 +734,9 @@ const Contact = () => {
 
         {/* Header */}
         <div className="ct-header">
-          <div className="ct-tag">// get in touch</div>
-          <h2 className="ct-title">Let's Build<br />Something.</h2>
-          <p className="ct-subtitle">Open to opportunities, collaborations & conversations.</p>
+          <div className="ct-tag">// say hi</div>
+          <h2 className="ct-title">Let's Talk.</h2>
+          <p className="ct-subtitle">Got something on your mind? Send me a message and I\'ll get back to you.</p>
         </div>
 
         {/* Grid */}
